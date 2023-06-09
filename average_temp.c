@@ -25,20 +25,20 @@ int main(int argc, char *argv[])
     if (argc != 2)
     {
         printf ("Usage: ./<program_name> <file_name>\n"); 
-        return 1;  
+        return EXIT_FAILURE;  
     }
 
-    if (read_file_to_dataStruct(argv[1], tempData, STRING_LENGTH, DATA_MAX))
+    if (read_file_to_dataStruct(argv[1], tempData, STRING_LENGTH, DATA_MAX) == EXIT_FAILURE)
     {
         printf ("File reading failed!\n");
-        return 1;
+        return EXIT_FAILURE;
     }
 
     sort_cities(tempData, STRING_LENGTH, DATA_MAX);
 
     print_struct(tempData, DATA_MAX);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 // Read data from file into a data structure for further processing
@@ -49,7 +49,7 @@ int read_file_to_dataStruct(char file_name[], struct DataStruct data[], int stri
     if (fileHandle == NULL)
     {
         printf ("Cannot open file!\n");
-        return 1;
+        return EXIT_FAILURE;
     }
 
     for (int i = 0; i < data_length; i++)
@@ -64,7 +64,7 @@ int read_file_to_dataStruct(char file_name[], struct DataStruct data[], int stri
 
     fclose(fileHandle);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 // Read file by comma ',' and newline '\n' delimiters
