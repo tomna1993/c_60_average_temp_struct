@@ -1,0 +1,10 @@
+Los Angeles,82
+Denver,90
+Las Vegas,105
+New York,85
+Miami,97
+Phoenix,107
+Boston,82
+Austin,97
+Chicago,85
+San Francisco,66
