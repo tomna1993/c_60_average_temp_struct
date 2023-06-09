@@ -3,15 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define CITY_LENGTH 20
+#define STRING_LENGTH 20
 #define DATA_MAX 70
 
 struct DataStruct
 {
-    char City[CITY_LENGTH];
+    char City[STRING_LENGTH];
     float Temp;
 };
 
+int read_file_to_dataStruct(char file_name[], struct DataStruct data[], int string_length, int data_length);
 void read_by_delimiter(FILE *fp, char stream[], int stream_length);
 float atoi_float(char number_text[]);
 void sort_cities(struct DataStruct sort_data[], int string_length, int data_length);
@@ -28,7 +29,23 @@ int main(int argc, string argv[])
         return 1;  
     }
 
-    FILE *fileHandle = fopen(argv[1], "r");
+    if (read_file_to_dataStruct(argv[1], tempData, STRING_LENGTH, DATA_MAX))
+    {
+        printf ("File reading failed!\n");
+        return 1;
+    }
+
+    sort_cities(tempData, STRING_LENGTH, DATA_MAX);
+
+    print_struct(tempData, DATA_MAX);
+
+    return 0;
+}
+
+// Read data from file into a data structure for further processing
+int read_file_to_dataStruct(char file_name[], struct DataStruct data[], int string_length, int data_length)
+{   
+    FILE *fileHandle = fopen(file_name, "r");
 
     if (fileHandle == NULL)
     {
@@ -36,20 +53,15 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    for (int i = 0; i < DATA_MAX; i++)
+    for (int i = 0; i < data_length; i++)
     {
-        const int number_length = 30;
-        char number_text[number_length];
+        char number_text[string_length];
 
-        read_by_delimiter(fileHandle, tempData[i].City, CITY_LENGTH); 
-        read_by_delimiter(fileHandle, number_text, number_length);
+        read_by_delimiter(fileHandle, data[i].City, string_length); 
+        read_by_delimiter(fileHandle, number_text, string_length);
 
-        tempData[i].Temp = atoi_float(number_text);
+        data[i].Temp = atoi_float(number_text);
     }
-
-    sort_cities(tempData, CITY_LENGTH, DATA_MAX);
-
-    print_struct(tempData, DATA_MAX);
 
     fclose(fileHandle);
 
