@@ -1,4 +1,3 @@
-#include <cs50.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +18,7 @@ void sort_cities(struct DataStruct sort_data[], int string_length, int data_leng
 void print_struct(struct DataStruct print_data[], int array_length);
 
 
-int main(int argc, string argv[])
+int main(int argc, char *argv[])
 {
     struct DataStruct tempData[DATA_MAX];
 
