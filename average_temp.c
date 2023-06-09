@@ -7,11 +7,12 @@
 #define DATA_MAX 20
 
 void read_by_delimiter(FILE *fp, char stream[], int stream_length);
+float atoi_float(char number_text[]);
 
 struct DataStruct
 {
     char City[CITY_LENGTH];
-    int Temp;
+    float Temp;
 };
 
 
@@ -41,7 +42,7 @@ int main(int argc, string argv[])
         read_by_delimiter(fileHandle, tempData[i].City, CITY_LENGTH); 
         read_by_delimiter(fileHandle, number_text, number_length);
 
-        tempData[i].Temp = atoi(number_text);
+        tempData[i].Temp = atoi_float(number_text);
     }
 
     for (int i = 0; i < DATA_MAX; i++)
@@ -50,7 +51,7 @@ int main(int argc, string argv[])
         {
             continue;
         }
-        printf ("%s: %i\n", tempData[i].City, tempData[i].Temp);
+        printf ("%s: %.2f\n", tempData[i].City, tempData[i].Temp);
     }
 
     fclose(fileHandle);
@@ -73,4 +74,57 @@ void read_by_delimiter(FILE *fp, char stream[], int stream_length)
     stream[i] = '\0';
 
     return;
+}
+
+float atoi_float(char number_text[])
+{
+    int index = 0;
+    float sign = 1.0;
+
+    float integer = 0.0;
+    float decimal = 0.0;
+
+    // Exclude any whitespace characters
+    while ( number_text[index] == ' ' ||
+            number_text[index] == '\t' ||
+            number_text[index] == '\n')
+    {
+        index++;
+    }
+
+    if (number_text[index] == '-' || number_text[index] == '+')
+    {
+        if (number_text[index] == '-')
+        {
+            sign = -1.0;
+        }
+        
+        index++;
+    }
+
+    // Calculate the integer part of the number
+    while (  number_text[index] != '\0' && number_text[index] != '.' && 
+            (number_text[index] >= '0' && number_text[index] <= '9') )
+    {
+        integer = (integer * 10.0) + (number_text[index] - '0');
+        index++;
+    }
+
+    // Calculate the decimal part of the number
+    if (number_text[index++] == '.')
+    {
+        float power_of_ten = 10.0;
+
+        while (  number_text[index] != '\0' && 
+                (number_text[index] >= '0' && number_text[index] <= '9') )
+        {
+            decimal += (number_text[index] - '0') / power_of_ten;
+
+            power_of_ten *= 10.0;
+
+            index++;
+        }
+    }
+
+    return (integer + decimal) * sign;
 }

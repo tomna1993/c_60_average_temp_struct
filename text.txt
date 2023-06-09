@@ -1,10 +1,56 @@
-Los Angeles,82
-Denver,90
-Las Vegas,105
-New York,85
-Miami,97
-Phoenix,107
-Boston,82
-Austin,97
-Chicago,85
-San Francisco,66
+Atlanta,17.5
+Austin,21
+Baltimore,13.5
+Birmingham,18
+Boston,11
+Buffalo,9.5
+Charlotte,16
+Chicago,11.5
+Cincinnati,12.5
+Cleveland,11.5
+Columbus,12
+Dallas,20.5
+Denver,11
+Detroit,10.5
+Fresno,18.5
+Grand Rapids,10
+Hartford,10.5
+Honolulu,25.5
+Houston,22
+Portland,12.5
+Providence,11
+Raleigh,16
+Richmond,15
+Riverside,19
+Rochester,10
+Sacramento,17.5
+Salt Lake City,12.5
+San Antonio,21
+San Diego,18.5
+San Francisco,14.5
+San Jose,16
+Seattle,12
+St. Louis,14
+Tampa,23.5
+Tucson,21.5
+Tulsa,16
+Virginia Beach,16.5
+Washington,15
+Indianapolis,12
+Jacksonville,22
+Kansas City,12.5
+Las Vegas,21
+Los Angeles,19
+Louisville,15
+Memphis,17.5
+Miami,25.5
+Milwaukee,9.5
+Minneapolis,8.5
+Nashville,16
+New Orleans,21.5
+New York,13
+Oklahoma City,15.5
+Orlando,23
+Philadelphia,13.5
+Phoenix,24.5
+Pittsburgh,11
