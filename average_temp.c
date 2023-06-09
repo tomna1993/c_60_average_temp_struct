@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define CITY_LENGTH 20
-#define DATA_MAX 50
+#define DATA_MAX 70
 
 struct DataStruct
 {
@@ -128,6 +128,7 @@ float atoi_float(char number_text[])
     return (integer + decimal) * sign;
 }
 
+// Sort data (selection sort) by temperature from the highest value to the lowest
 void sort_cities(struct DataStruct sort_data[], int string_length, int data_length)
 {
     for (int start = 0; start < data_length - 1; start++)
