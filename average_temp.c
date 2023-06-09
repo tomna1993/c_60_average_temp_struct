@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define CITY_LENGTH 20
-#define DATA_MAX 20
+#define DATA_MAX 50
 
 void read_by_delimiter(FILE *fp, char stream[], int stream_length);
 float atoi_float(char number_text[]);
