@@ -6,14 +6,16 @@
 #define CITY_LENGTH 20
 #define DATA_MAX 50
 
-void read_by_delimiter(FILE *fp, char stream[], int stream_length);
-float atoi_float(char number_text[]);
-
 struct DataStruct
 {
     char City[CITY_LENGTH];
     float Temp;
 };
+
+void read_by_delimiter(FILE *fp, char stream[], int stream_length);
+float atoi_float(char number_text[]);
+void sort_cities(struct DataStruct sort_data[], int string_length, int data_length);
+void print_struct(struct DataStruct print_data[], int array_length);
 
 
 int main(int argc, string argv[])
@@ -45,20 +47,16 @@ int main(int argc, string argv[])
         tempData[i].Temp = atoi_float(number_text);
     }
 
-    for (int i = 0; i < DATA_MAX; i++)
-    {
-        if (strlen(tempData[i].City) == 0)
-        {
-            continue;
-        }
-        printf ("%s: %.2f\n", tempData[i].City, tempData[i].Temp);
-    }
+    sort_cities(tempData, CITY_LENGTH, DATA_MAX);
+
+    print_struct(tempData, DATA_MAX);
 
     fclose(fileHandle);
 
     return 0;
 }
 
+// Read file by comma ',' and newline '\n' delimiters
 void read_by_delimiter(FILE *fp, char stream[], int stream_length)
 {
     int i = 0;
@@ -76,6 +74,7 @@ void read_by_delimiter(FILE *fp, char stream[], int stream_length)
     return;
 }
 
+// Convert number string to decimal number
 float atoi_float(char number_text[])
 {
     int index = 0;
@@ -127,4 +126,65 @@ float atoi_float(char number_text[])
     }
 
     return (integer + decimal) * sign;
+}
+
+void sort_cities(struct DataStruct sort_data[], int string_length, int data_length)
+{
+    for (int start = 0; start < data_length - 1; start++)
+    {
+        int minVal_index = start;
+
+        // Sort the values from lower to the highest
+        // for (int step = start + 1; step < data_length; step++)
+        // {
+        //     // Find the lowest value and save its index
+        //     if (sort_data[minVal_index].Temp > sort_data[step].Temp)
+        //     {
+        //         minVal_index = step;
+        //     }   
+        // }
+
+        // Sort the values from the highest to the lowest
+        for (int step = start + 1; step < data_length; step++)
+        {
+            // Find the lowest value and save its index
+            if (sort_data[minVal_index].Temp < sort_data[step].Temp)
+            {
+                minVal_index = step;
+            }   
+        }
+
+        // Move the lowest value to the beginning of the array
+        if (minVal_index != start)
+        {
+            // Swap city
+            char tmp_city[string_length];
+
+            strcpy(tmp_city, sort_data[start].City);
+            strcpy(sort_data[start].City, sort_data[minVal_index].City);
+            strcpy(sort_data[minVal_index].City, tmp_city);
+
+            // Swap temp
+            float tmp_temp = sort_data[start].Temp;
+            sort_data[start].Temp = sort_data[minVal_index].Temp;
+            sort_data[minVal_index].Temp = tmp_temp;    
+        }
+    }
+
+    return;
+}
+
+// Print the data structure
+void print_struct(struct DataStruct print_data[], int array_length)
+{
+    for (int i = 0; i < array_length; i++)
+    {
+        if (strlen(print_data[i].City) == 0)
+        {
+            continue;
+        }
+        printf ("%s: %.2f\n", print_data[i].City, print_data[i].Temp);
+    }
+
+    return;
 }
